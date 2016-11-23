@@ -11,3 +11,5 @@ Or
     git init
     git pull https://github.com/jsa41394/Pulse/tree/master
 ```
+
+2. Open index.html in browser (e.g. Chrome, Firefox, IE)
