@@ -1,16 +1,42 @@
-var img = document.getElementById("scream");
+/* 
+LICENSE: All Rights Reserved (may chance to MIT here)
+@author jason.albalah@yahoo.com
+@date 11/23/2016
+
+~~~ WARNING: ~~~ 
+Flicker may cause seizures in viewers sensitive to strobing
+
+*/
+//------------------------------------------------------------------
+// Key Settings:
+var IMG_HTML_ID = "scream";
+var BOX_SIZE = 20;  // pixels in square box (too small -> slow processing errors)
+//var GROUP_SIZE = 8; // smaller is easier to see, larger is more secure
+                      // cannot be 0 or larger than the number of boxes
+var GROUP_SIZE = -1;  // default: number of boxes - 1
+
+// Optional Settings:
+var DISP_TIME = 6;   // milliseconds to show each random partial image
+var LOOP_DISP = 50;  // number of times to loop through partial images
+var BACKGROUND_COLOR = "white";
+//var BACKGROUND_COLOR = "white";
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+var img = document.getElementById(IMG_HTML_ID);
 
 var cnvs = document.getElementById("canvases");
 var numCnvs = 0;
 var cnvsArr = []; // array of cnv2d objects
 
 var boxArr = [];  // array of box coordinates (MECE)
-var boxSize = 50;  //px
+var boxSize = BOX_SIZE;  //px
+
+document.body.style.backgroundColor = BACKGROUND_COLOR;
 
 function main(){
     randLayerCanvases();  // create layers of partial images
     setTimeout(function(){
-        showLayers(50);  // flicker layered images n times
+        showLayers(LOOP_DISP);  // flicker layered images n times
         //cnvsArr[cnvsArr.length-1].style.display = "inline";
     }, 50);
 }
@@ -23,7 +49,7 @@ window.onload = function() {
 
 function showLayers(numTimes){
     if(numTimes > 0){
-        var MS_SHOW = 6;
+        var MS_SHOW = DISP_TIME;
         //var MS_SHOW_TIME = 10; 
         for(var c = 0; c < boxArr.length; c++){ //boxArr.length
             setTimeout(function(c){
@@ -72,14 +98,18 @@ function setBoxArray(){
             boxArr.push( [x, y, boxSize, boxSize] );
         }
     }
+    document.getElementById('Notes').innerHTML = boxArr.length + " boxes";
+    if(GROUP_SIZE == -1){
+        GROUP_SIZE = boxArr.length - 1;
+    }
 }
 function whitewash(ctx, skipIndex){
     var boxCoord;
     for(var c = 0; c < boxArr.length; c++){ //boxArr.length
         //if(c != skipIndex){
-        if(sameGroup(c, skipIndex, boxArr.length, 20)){
+        if(sameGroup(c, skipIndex, boxArr.length, GROUP_SIZE)){
             boxCoord = boxArr[c];
-            drawRect(ctx, boxCoord[0],boxCoord[1],boxCoord[2],boxCoord[3], "white");
+            drawRect(ctx, boxCoord[0],boxCoord[1],boxCoord[2],boxCoord[3], BACKGROUND_COLOR);
         }
     }
 }
