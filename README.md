@@ -1,5 +1,6 @@
 # Pulse
 Beap, Beap, Snap! SnapPulse requires a pulse to see your pics, in a snap!
+Pulse leverages the eye's averaging of image information over time to display a picture, while showing a random picture to a camera with a short exposure. To prevent long-exposure and small aperture / low ISO shots, a new version should be made that leverages the way eye's view colors specifically (e.g. using shadows to darken)  
 
 ## Setup
 ### 1. 
