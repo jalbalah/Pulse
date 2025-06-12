@@ -1,5 +1,5 @@
 /* 
-LICENSE: All Rights Reserved (may chance to MIT here)
+LICENSE: MIT License
 @author jason.albalah@yahoo.com
 @date 11/23/2016
 
